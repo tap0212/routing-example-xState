@@ -1,17 +1,18 @@
-import { useRouter } from 'next/router'
+import { useMachineSubscriber } from '../../System/handlers/useMachineSubscriber';
+import { xStateSendNames } from '../../utils/constants';
 import { ButtonType, Button } from '../../Components/Button';
 import Header from '../../Components/Header';
 
 const OnboardingQuestion3 = () => {
-  const router = useRouter();
+  const {send} = useMachineSubscriber();
   const handleConnectStatements = () => {
-    router.push('/signup')
+    send(xStateSendNames.SIGNUP)
   };
   const handleEmailUs = () => {
-    router.push('/emailUs')
+    send(xStateSendNames.EMAIL_US)
   };
   const onBack = () => {
-    router.back()
+    send(xStateSendNames.PREV)
   }
   return (
     <>

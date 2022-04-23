@@ -47,14 +47,8 @@ const baseExperiment = () =>
       },
       onboardingQuestion3: {
         on: {
-          NEXT: [
-            {
-              target: 'signup',
-            },
-            {
-              target: 'emailUs',
-            },
-          ],
+          SIGNUP: 'signup',
+          EMAIL_US: 'emailUs',
           PREV: 'onboardingQuestion2',
         },
       },
@@ -96,9 +90,7 @@ const baseExperiment = () =>
         },
       },
       error: {
-        on: {
-          PREV: 'signup',
-        },
+        on: {},
       },
     },
   });

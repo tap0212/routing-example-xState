@@ -1,14 +1,16 @@
-import { useRouter } from 'next/router'
 import { ButtonType, Button } from '../../Components/Button';
 import Header from '../../Components/Header';
+import { useMachineSubscriber } from '../../System/handlers/useMachineSubscriber';
+import { xStateSendNames } from '../../utils/constants';
 
 const OnboardingQuestion1a = () => {
-  const router = useRouter();
+  const {send} = useMachineSubscriber();
   const handleNext = () => {
-    router.push('/onboardingQuestion2')
+    send(xStateSendNames.NEXT)
   };
   const onBack = () => {
-    router.back()
+    // TODO add logic here
+    send(xStateSendNames.PREV)
   }
   return (
     <>

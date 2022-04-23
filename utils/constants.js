@@ -7,6 +7,8 @@ export const CURRENT_EXPERIMENT = 'CURRENT_EXPERIMENT';
 export const xStateSendNames = {
   NEXT: 'NEXT',
   PREV: 'PREV',
+  SIGNUP: 'SIGNUP',
+  EMAIL_US: 'EMAIL_US',
 };
 
 

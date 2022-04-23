@@ -1,17 +1,16 @@
-import { useRouter } from 'next/router'
+import { useMachineSubscriber } from '../../System/handlers/useMachineSubscriber';
+import { xStateSendNames } from '../../utils/constants';
 import { ButtonType, Button } from '../../Components/Button';
 import Header from '../../Components/Header';
 
 const ConnectBank = () => {
-  const router = useRouter();
+  const {send} = useMachineSubscriber();
   const handleNext = () => {
-    router.push('/success')
-  };
-  const handleMockError = () => {
-    router.push('/error')
+    // TODO add logic here
+    send(xStateSendNames.NEXT)
   };
   const onBack = () => {
-    router.back()
+    send(xStateSendNames.PREV)
   }
   return (
     <>
@@ -22,9 +21,6 @@ const ConnectBank = () => {
         </div>
         <Button onClick={handleNext} buttonType={ButtonType.PRIMARY}>
           Continue
-        </Button>
-        <Button onClick={handleMockError} buttonType={ButtonType.DANGER}>
-          Mock Error
         </Button>
       </div>
     </>

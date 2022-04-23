@@ -1,9 +1,12 @@
-import { useRouter } from 'next/router'
 import { ButtonType, Button } from '../Components/Button';
+import {useMachineSubscriber} from '../System/handlers/useMachineSubscriber'
+import { xStateSendNames } from '../utils/constants';
+
 const Home = () => {
-  const router = useRouter();
+  const {send} = useMachineSubscriber();
+  
   const handleNext = () => {
-    router.push('/onboardingQuestion1')
+    send(xStateSendNames.NEXT)
   };
   return (
     <div className="w-full px-4 flex flex-col flex-1 ">

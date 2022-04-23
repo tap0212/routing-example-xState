@@ -1,23 +1,21 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router'
+import { xStateSendNames } from '../../utils/constants';
 import { ButtonType, Button } from '../../Components/Button';
 import Header from '../../Components/Header';
+import { useMachineSubscriber } from '../../System/handlers/useMachineSubscriber';
 
 const OnboardingQuestion1 = () => {
-  const router = useRouter();
+  const {send} = useMachineSubscriber();
   const [shouldGoTo1a, setShouldGoTo1a] = useState(false);
   const handleYes = () => {
-    if (shouldGoTo1a) {
-      router.push('/onboardingQuestion1a')
-    } else {
-      router.push('/onboardingQuestion2')
-    }
+    // TODO: send payload here for the condition
+    send(xStateSendNames.NEXT)
   };
   const handleChange = e => {
     setShouldGoTo1a(e.target.value);
   };
   const onBack = () => {
-    router.back()
+    send(xStateSendNames.PREV)
   }
   return (
    <>

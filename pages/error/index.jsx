@@ -5,7 +5,7 @@ import Header from '../../Components/Header';
 const Error = () => {
   const router = useRouter();
   const handleRetry = () => {
-   router.back()
+    router.back()
   };
   const onBack = () => {
     router.back()
