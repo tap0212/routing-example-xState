@@ -1,11 +1,15 @@
-import { createMachine } from 'xstate';
+import { createMachine, assign } from 'xstate';
+
+const assignShouldGoTo1a = assign({
+  shouldGoTo1a: (_context, event) => event.shouldGoTo1a
+});
 
 const baseExperiment = () =>
   createMachine({
     id: 'example',
     initial: 'home',
     context: {
-      retries: 0,
+      shouldGoTo1a: false,
     },
     states: {
       home: {
@@ -18,9 +22,16 @@ const baseExperiment = () =>
           NEXT: [
             {
               target: 'onboardingQuestion1a',
+              cond: (_context, event) => event.shouldGoTo1a,
+              actions: [
+                assignShouldGoTo1a
+              ]
             },
             {
               target: 'onboardingQuestion2',
+              actions: [
+                assignShouldGoTo1a
+              ]
             },
           ],
           PREV: 'home',
@@ -29,20 +40,21 @@ const baseExperiment = () =>
       onboardingQuestion1a: {
         on: {
           NEXT: 'onboardingQuestion2',
-          PREV: [
-            {
-              target: 'onboardingQuestion1',
-            },
-            {
-              target: 'onboardingQuestion2',
-            },
-          ],
+          PREV: 'onboardingQuestion1'
         },
       },
       onboardingQuestion2: {
         on: {
           NEXT: 'onboardingQuestion3',
-          PREV: 'onboardingQuestion1',
+          PREV: [
+            {
+              target: 'onboardingQuestion1a',
+              cond: (context, _event) => context.shouldGoTo1a
+            },
+            {
+              target: 'onboardingQuestion1',
+            },
+          ],
         },
       },
       onboardingQuestion3: {
@@ -57,6 +69,7 @@ const baseExperiment = () =>
           NEXT: [
             {
               target: 'error',
+              cond: (_context, event) => event.error,
             },
             {
               target: 'connectBank',
@@ -71,6 +84,7 @@ const baseExperiment = () =>
           NEXT: [
             {
               target: 'error',
+              cond: (_context, event) => event.error,
             },
             {
               target: 'success',

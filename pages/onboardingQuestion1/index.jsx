@@ -7,12 +7,12 @@ import { useMachineSubscriber } from '../../System/handlers/useMachineSubscriber
 const OnboardingQuestion1 = () => {
   const {send} = useMachineSubscriber();
   const [shouldGoTo1a, setShouldGoTo1a] = useState(false);
+
   const handleYes = () => {
-    // TODO: send payload here for the condition
-    send(xStateSendNames.NEXT)
+    send({type: xStateSendNames.NEXT, shouldGoTo1a: shouldGoTo1a})
   };
-  const handleChange = e => {
-    setShouldGoTo1a(e.target.value);
+  const handleChange = () => {
+    setShouldGoTo1a(!shouldGoTo1a);
   };
   const onBack = () => {
     send(xStateSendNames.PREV)
@@ -28,7 +28,7 @@ const OnboardingQuestion1 = () => {
           className="mr-4 w-4 h-4 "
           type="checkbox"
           onChange={handleChange}
-          value={shouldGoTo1a}
+          checked={shouldGoTo1a}
         />
         <p className="text-white">Should go to Onboarding question 1a?</p>
       </div>

@@ -5,9 +5,9 @@ import Header from '../../Components/Header';
 
 const Signup = () => {
   const {send} = useMachineSubscriber();
+  const error = false;
   const handleNext = () => {
-    // TODO add logic here
-    send(xStateSendNames.NEXT)
+    send({type: xStateSendNames.NEXT, error})
   };
   const onBack = () => {
     send(xStateSendNames.PREV)

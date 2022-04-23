@@ -9,7 +9,6 @@ const OnboardingQuestion1a = () => {
     send(xStateSendNames.NEXT)
   };
   const onBack = () => {
-    // TODO add logic here
     send(xStateSendNames.PREV)
   }
   return (
