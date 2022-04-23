@@ -9,7 +9,6 @@ import { usePersistState } from '../hooks/usePersistState';
 import { CURRENT_EXPERIMENT, EXPERIMENTS } from '../utils/constants';
 import { useMachineWrapper } from '../System/handlers/useMachineWrapper';
 function MyApp({ Component, pageProps }) {
-  const router = useRouter();
   const [currentExperiment, setCurrentExperiment] = usePersistState(
     CURRENT_EXPERIMENT,
     EXPERIMENTS.baseExperiment,
@@ -21,14 +20,9 @@ function MyApp({ Component, pageProps }) {
   }, []);
   const { xStateMachine } = useMachineWrapper();
 
-  const onBack = () => {
-    router.back()
-  }
-  const isInitialRoute = router.route === '/';
   return (
     <XStateMachineContext.Provider value={xStateMachine}>
       <Layout>
-        <Header onBack={!isInitialRoute ? onBack : null} />
         <Component {...pageProps} />
       </Layout>
     </XStateMachineContext.Provider>

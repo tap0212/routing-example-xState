@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { ButtonType, Button } from '../../Components/Button';
+import Header from '../../Components/Header';
 
 const Signup = () => {
   const router = useRouter();
@@ -9,8 +10,13 @@ const Signup = () => {
   const handleMockError = () => {
     router.push('/error')
   };
+  const onBack = () => {
+    router.back()
+  }
   return (
-    <div className="w-full px-4 flex flex-col flex-1 ">
+   <>
+    <Header onBack={onBack} />
+     <div className="w-full px-4 flex flex-col flex-1 ">
       <div className="flex flex-col items-center justify-center flex-1">
         <h1 className="text-white text-3xl">Signup</h1>
       </div>
@@ -21,6 +27,7 @@ const Signup = () => {
         Mock Error
       </Button>
     </div>
+   </>
   );
 };
 export default Signup;
