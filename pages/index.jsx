@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router'
 import { ButtonType, Button } from '../Components/Button';
-
 const Home = () => {
   const router = useRouter();
-
   const handleNext = () => {
     router.push('/onboardingQuestion1')
   };
